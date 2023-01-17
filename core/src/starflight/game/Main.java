@@ -45,8 +45,7 @@ public class Main extends ApplicationAdapter {
 		viewport = new ExtendViewport(screenW, screenH);
 		viewport.setCamera(camera);
 
-		// post = new PostProcessor(false, false, Gdx.app.getType() ==
-		// ApplicationType.Desktop);
+		// post = new PostProcessor(false, false, Gdx.app.getType() == ApplicationType.Desktop);
 
 		// Nfaa nfaa = new Nfaa(screenW, screenH);
 
