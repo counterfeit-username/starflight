@@ -10,6 +10,7 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.useVsync(false);
 		config.setTitle("Starflight");
+		config.setWindowIcon("images/icons/IconSmall.png");
 		//config.setBackBufferConfig(8, 8, 8, 8, 16, 0, 2);
 		new Lwjgl3Application(new Main(), config);
 		
