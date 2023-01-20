@@ -11,6 +11,8 @@ DanVahsh License (Copyright (c) 2023-Present Daniel Vahsholtz) - Version 1.1 - J
 Preamble:
 * This license was inspired by the MIT, BOOST, BSD, FreeType, GNU, and JSON.org licenses.
 
+* This license can be found at https://github.com/danvahsh/danvahsh-license/blob/main/LICENSE.txt
+
 * If you would like to get written permission for Section 2 of the license please contact me at 's2requests@danielvahsholtz.com' with the message subject being titled "Section 2 Permission Request for 'Project Name'" With 'Project Name' being the name of the project.
 * If you see a needed revision to this license please contact 'dvlrevisions@danielvahsholtz.com' with the message subject being titled "DanVa License 1.0 Revision Suggestion". If the suggestion is good enough your name will be in the next version.
 
