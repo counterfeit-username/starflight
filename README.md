@@ -6,7 +6,7 @@ I'm targeting desktop as the platform.
 This game is being developed using Java with a library called libGDX.
 
 ## Build instructions
-To build, clone the repo and run gradlew.bat which will generate the jar file at desktop/build/libs.
+To build, clone the repo and run `gradlew build` which will generate the jar file at desktop/build/libs.
 
 Clone command: `git clone https://github.com/counterfeit-username/starflight.git`
 
