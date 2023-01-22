@@ -9,7 +9,7 @@ This game is being developed using Java with a library called libGDX.
 To build:
 ```
 git clone https://github.com/counterfeit-username/starflight.git
-gradlew build
+gradlew desktop:dist
 ```
 This will build the project into a .jar file at desktop/build/libs.
 
