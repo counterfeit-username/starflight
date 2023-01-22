@@ -115,4 +115,4 @@ Thumbs.db
 
 ## Custom configs
 .vscode/
-jdk_for_test_builds
+jdk_for_test_builds/
