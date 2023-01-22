@@ -45,7 +45,8 @@ public class Main extends ApplicationAdapter {
 		viewport = new ExtendViewport(screenW, screenH);
 		viewport.setCamera(camera);
 
-		// post = new PostProcessor(false, false, Gdx.app.getType() == ApplicationType.Desktop);
+		// post = new PostProcessor(false, false, Gdx.app.getType() ==
+		// ApplicationType.Desktop);
 
 		// Nfaa nfaa = new Nfaa(screenW, screenH);
 
@@ -60,11 +61,14 @@ public class Main extends ApplicationAdapter {
 		batch = new SpriteBatch();
 
 		assets.load("images/ship.png", Texture.class, textureParameters);
+		assets.load("images/mainthrust.png", Texture.class, textureParameters);
+		assets.load("images/rcsthrust.png", Texture.class, textureParameters);
 		assets.finishLoading();
 
-		ship = new Ship(0, 0);
+		ship = new Ship(0, 0, assets);
+		ship.direction = 0;
 		ship.setTexture(assets.get("images/ship.png", Texture.class));
-		ship.scale = 0.1f;
+		ship.scale.set(0.1f, 0.1f);
 	}
 
 	@Override
@@ -76,16 +80,16 @@ public class Main extends ApplicationAdapter {
 	}
 
 	private void update(float deltaTime) {
-		
+
 		ship.update(deltaTime);
 
 	}
 
 	private void draw(float deltaTime) {
-		camera.position.x =  ship.width / 2 * ship.scale;
-		camera.position.y = ship.height / 2 * ship.scale;
+		camera.position.x = 0;
+		camera.position.y = 0;
 		camera.update();
-		
+
 		ScreenUtils.clear(0, 0, 0, 1);
 
 		batch.setProjectionMatrix(camera.combined);
