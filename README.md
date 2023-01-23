@@ -20,7 +20,7 @@ A key: RCS counter clockwise, and D key: RCS clockwise. (For those who don't kno
 Control System and is a system of small thrusters which control the position and rotation of a ship.)
 
 ## Starflight's installer
-Starflight's installer's repository can be found [here](https://github.com/danvahsh/starflight-installer)
+Starflight's installer's repository can be found [here.](https://github.com/danvahsh/starflight-installer)
 
 ## Extras
 More Information on libGDX can be found at: https://libgdx.com/ and https://libgdx.com/wiki.
