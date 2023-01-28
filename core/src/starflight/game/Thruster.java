@@ -15,8 +15,6 @@ public class Thruster extends Sprite {
 
     private Vector2 thrustVector;
 
-    public Vector2 rotatedPosition;
-
     public Thruster(Vector2 position, float direction, float power, Texture texture, int[] keys, Ship ship) {
         this.position = position;
         this.direction = direction;
@@ -34,8 +32,6 @@ public class Thruster extends Sprite {
     }
 
     public void update(float deltaTime) {
-        super.update();
-
         for (int key : keys) {
             if (Gdx.input.isKeyPressed(key)) {
                 force.set(0, power * deltaTime);
@@ -80,8 +76,6 @@ public class Thruster extends Sprite {
             position.rotateDeg(angle);
             direction += angle;
         }
-
-        position.x = originalX;
 
         return torque;
     }

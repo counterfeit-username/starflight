@@ -17,7 +17,7 @@ buildscript {
 allprojects {
     apply plugin: "eclipse"
 
-    version = "0.1"
+    version = "0.1.0-alpha"
     ext {
         appName = "Starflight"
         gdxVersion = '1.11.0'

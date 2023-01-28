@@ -8,83 +8,88 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
 public class Ship extends Sprite {
-    private Vector2 velocity;
+        public Vector2 velocity;
+        private float rotationVelocity;
 
-    private float rotationVelocity;
+        private float mass;
+        private float massMomentOfInertia;
 
-    private AssetManager assets;
+        private AssetManager assets;
 
-    private Array<Thruster> thrusters;
+        private Array<Thruster> thrusters;
 
-    public Ship(float x, float y, AssetManager assets) {
-        velocity = new Vector2();
-        rotationVelocity = 0;
+        public Ship(float x, float y, AssetManager assets) {
+                velocity = new Vector2();
+                rotationVelocity = 0;
 
-        position.set(x, y);
+                position.set(x, y);
 
-        this.assets = assets;
+                mass = 50f;
 
-        thrusters = new Array<Thruster>();
+                this.assets = assets;
 
-        // Main Engines
-        thrusters.add(new Thruster(new Vector2(-4f, -37f), 0f, 50f,
-                assets.get("images/mainthrust.png", Texture.class), new int[] { Keys.SPACE, }, this));
+                thrusters = new Array<Thruster>();
 
-        thrusters.add(new Thruster(new Vector2(4f, -37f), 0f, 50f,
-                assets.get("images/mainthrust.png", Texture.class), new int[] { Keys.SPACE, }, this));
+                // Main Engines
+                thrusters.add(new Thruster(new Vector2(-4.4f, -37f), 0f, 500f,
+                                assets.get("images/mainthrust.png", Texture.class), new int[] { Keys.SPACE, }, this));
 
-        // Left side
-        thrusters.add(new Thruster(new Vector2(-17f, 20f), -90f, 5f,
-            assets.get("images/rcsthrust.png", Texture.class), new int[] { Keys.E, Keys.D}, this));
+                thrusters.add(new Thruster(new Vector2(4.4f, -37f), 0f, 500f,
+                                assets.get("images/mainthrust.png", Texture.class), new int[] { Keys.SPACE, }, this));
 
-        thrusters.add(new Thruster(new Vector2(-25f, -20f), -90f, 5f,
-            assets.get("images/rcsthrust.png", Texture.class), new int[] { Keys.E, Keys.A}, this));
+                // Left side
+                thrusters.add(new Thruster(new Vector2(-17f, 20f), -90f, 50f,
+                                assets.get("images/rcsthrust.png", Texture.class), new int[] { Keys.E, Keys.D }, this));
 
-        // Right side
-        thrusters.add(new Thruster(new Vector2(17f, 20f), 90f, 5f,
-            assets.get("images/rcsthrust.png", Texture.class), new int[] { Keys.Q, Keys.A}, this));
+                thrusters.add(new Thruster(new Vector2(-25f, -20f), -90f, 50f,
+                                assets.get("images/rcsthrust.png", Texture.class), new int[] { Keys.E, Keys.A }, this));
 
-        thrusters.add(new Thruster(new Vector2(25f, -20f), 90f, 5f,
-            assets.get("images/rcsthrust.png", Texture.class), new int[] { Keys.Q, Keys.D}, this));
+                // Right side
+                thrusters.add(new Thruster(new Vector2(17f, 20f), 90f, 50f,
+                                assets.get("images/rcsthrust.png", Texture.class), new int[] { Keys.Q, Keys.A }, this));
 
-        // Top
-        thrusters.add(new Thruster(new Vector2(-5f, 39f), 180f, 5f,
-            assets.get("images/rcsthrust.png", Texture.class), new int[] { Keys.S, }, this));
+                thrusters.add(new Thruster(new Vector2(25f, -20f), 90f, 50f,
+                                assets.get("images/rcsthrust.png", Texture.class), new int[] { Keys.Q, Keys.D }, this));
 
-        thrusters.add(new Thruster(new Vector2(5f, 39f), 180f, 5f,
-            assets.get("images/rcsthrust.png", Texture.class), new int[] { Keys.S, }, this));
+                // Top
+                thrusters.add(new Thruster(new Vector2(-5f, 39f), 180f, 50f,
+                                assets.get("images/rcsthrust.png", Texture.class), new int[] { Keys.S, }, this));
 
-        // Bottom
-        thrusters.add(new Thruster(new Vector2(-13f, -33f), 0f, 5f,
-            assets.get("images/rcsthrust.png", Texture.class), new int[] { Keys.W, }, this));
+                thrusters.add(new Thruster(new Vector2(5f, 39f), 180f, 50f,
+                                assets.get("images/rcsthrust.png", Texture.class), new int[] { Keys.S, }, this));
 
-        thrusters.add(new Thruster(new Vector2(13f, -33f), 0f, 5f,
-            assets.get("images/rcsthrust.png", Texture.class), new int[] { Keys.W, }, this));
+                // Bottom
+                thrusters.add(new Thruster(new Vector2(-13f, -33f), 0f, 50f,
+                                assets.get("images/rcsthrust.png", Texture.class), new int[] { Keys.W, }, this));
 
-        for (Thruster thruster : thrusters) {
-            thruster.parent = this;
-        }
-    }
+                thrusters.add(new Thruster(new Vector2(13f, -33f), 0f, 50f,
+                                assets.get("images/rcsthrust.png", Texture.class), new int[] { Keys.W, }, this));
 
-    public void update(float deltaTime) {
-
-        for (Thruster thruster : thrusters) {
-            thruster.update(deltaTime);
-            velocity.add(thruster.force.rotateDeg(direction));
-
-            rotationVelocity += thruster.torque;
+                for (Thruster thruster : thrusters) {
+                        thruster.parent = this;
+                }
         }
 
-        position.mulAdd(velocity, deltaTime);
-        direction += rotationVelocity * deltaTime;
+        public void update(float deltaTime) {
 
-        super.update();
-    }
+                for (Thruster thruster : thrusters) {
+                        thruster.update(deltaTime);
+                        thruster.force.rotateDeg(direction);
+                        velocity.x += thruster.force.x / mass;
+                        velocity.y += thruster.force.y / mass;
 
-    public void draw(SpriteBatch batch) {
-        for (Thruster thruster : thrusters) {
-            thruster.draw(batch);
+                        rotationVelocity += thruster.torque / mass;
+                        System.out.println();
+                }
+
+                position.mulAdd(velocity, deltaTime);
+                direction += rotationVelocity * deltaTime;
         }
-        super.draw(batch);
-    }
+
+        public void draw(SpriteBatch batch) {
+                for (Thruster thruster : thrusters) {
+                        thruster.draw(batch);
+                }
+                super.draw(batch);
+        }
 }

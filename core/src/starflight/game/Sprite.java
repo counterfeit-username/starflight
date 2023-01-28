@@ -16,12 +16,9 @@ public class Sprite {
     public Vector2 dimensions = new Vector2();
     public Vector2 size = new Vector2();
 
-    public Vector2 scale = new Vector2();
+    public Vector2 scale = new Vector2(1, 1);
 
     public Sprite parent;
-
-    public void update() {
-    }
 
     public void draw(SpriteBatch batch) {
         if (visible) {
